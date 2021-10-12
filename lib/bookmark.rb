@@ -1,9 +1,13 @@
+require "pg"
+
 class Bookmark
   def self.all
-    [
-      "https://www.google.co.uk/",
-      "https://www.elsevier.com/en-gb",
-      "https://www.moogmusic.com/",
-    ]
+    bookmarks = []
+    connect = PG.connect(dbname: "bookmark_manager")
+    rows = connect.exec("SELECT * FROM bookmarks")
+    rows.each do |row|
+      bookmarks << row["url"]
+    end
+    bookmarks
   end
 end
