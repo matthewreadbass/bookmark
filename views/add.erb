@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmarks</title>
+    <title>Add</title>
 </head>
 <body>
-    <ul>
-    <% @bookmarks.each do |bookmark| %>
-        <li><%= bookmark[:title] %>, <%= bookmark[:url] %></li>
-    <% end %>
-    </ul>
-    
+  <form action='/update' method='post'>
+    <input type='text' name='title' placeholder="Title">
+    <input type='text' name='url' placeholder="URL">
+    <input type='submit' value='Add'>
+  </form>
 </body>
 </html>

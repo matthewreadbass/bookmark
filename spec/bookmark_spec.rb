@@ -1,19 +1,16 @@
 require "bookmark"
 
 describe Bookmark do
-  describe "#all" do
+  describe ".all" do
     it "returns all bookmarks" do
-      connection = PG.connect(dbname: "bookmark_manager_test")
-
-      connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.google.co.uk/');")
-      connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.elsevier.com/en-gb');")
-      connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.moogmusic.com/');")
-
-      bookmarks = Bookmark.all
-
-      expect(bookmarks).to include({ :url => "https://www.google.co.uk/" })
-      expect(bookmarks).to include({ :url => "https://www.elsevier.com/en-gb" })
-      expect(bookmarks).to include({ :url => "https://www.moogmusic.com/" })
+      described_class.create("Moog", "https://www.moogmusic.com/")
+      expect(described_class.all).to include({ :title => "Moog", :url => "https://www.moogmusic.com/" })
+    end
+  end
+  describe ".create" do
+    it "adds a bookmark to a saved list of bookmarks" do
+      described_class.create("Make Noise Music", "https://www.makenoisemusic.com/")
+      expect(described_class.all).to include({ :title => "Make Noise Music", :url => "https://www.makenoisemusic.com/" })
     end
   end
 end
