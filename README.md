@@ -22,3 +22,6 @@ Postgres installation:
 4. CREATE DATABASE "bookmark_manager";
 5. Connect to the database using \c bookmark_manager;
 6. Run query from 01_create_bookmarks_table.sql
+
+CREATE DATABASE bookmark_manager_test;
+CREATE TABLE bookmarks (id SERIAL PRIMARY KEY, url VARCHAR(60));

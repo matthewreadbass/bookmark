@@ -2,9 +2,13 @@ require "pg"
 
 class Bookmark
   def self.all
+    if ENV["ENVIRONMENT"] == "test"
+      connection = PG.connect(dbname: "bookmark_manager_test")
+    else
+      connection = PG.connect(dbname: "bookmark_manager")
+    end
     bookmarks = []
-    connect = PG.connect(dbname: "bookmark_manager")
-    rows = connect.exec("SELECT * FROM bookmarks")
+    rows = connection.exec("SELECT * FROM bookmarks")
     rows.each do |row|
       bookmarks << row["url"]
     end
